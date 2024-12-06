@@ -12,7 +12,7 @@ ROWS = (HEIGHT // GRID_SIZE) - 1
 COLS = (WIDTH // GRID_SIZE) - 1 
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Mapa com Quadras e Ruas Reduzido")
+pygame.display.set_caption("Mapa")
 
 WHITE = (255, 255, 255)  # Rua (atualizada pra cores por conta do trafego)
 BLUE = (0, 0, 255)
@@ -131,6 +131,10 @@ def move_car(car):
     if car["wait_time"] > 0:
         car["wait_time"] -= 1
         return
+
+    # Verifique se end_point está definido
+    if end_point is None:
+        return  # Não faça nada se não houver um ponto final
 
     actions = ["UP", "DOWN", "LEFT", "RIGHT"]
     state = (car["y"], car["x"])
